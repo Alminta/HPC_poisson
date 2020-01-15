@@ -17,10 +17,31 @@ zeros(double ***m, int N)
 }
 
 void
+full(double ***m, int N)
+{
+    int i,j,k;
+
+    for (i = 0; i < N; i++){
+        for (j = 0; j < N; j++){
+            for (k = 0; k < N; k++){
+                m[i][j][k] = 20.0;
+            }
+        }
+    }
+}
+
+
+void
 boundary(double ***m, int N)
 {
     int i, j, k, Nm1;
     Nm1 = N - 1;
+
+    for (i = 0; i < N; i++){
+        for (k = 0; k < N; k++){
+            m[i][0][k] = 0.0;
+        }
+    }
 
     for (i = 0; i < N; i++){
         for (k = 0; k < N; k++){
@@ -53,10 +74,10 @@ source(double ***m, int N)
     double gs;
 
     xl = 0;
-    xu = 3 * N / 16;
+    xu = 5 * N / 16;
     yl = 0;
     yu = N / 4;
-    zl = 2 * N / 6;
+    zl = N / 6;
     zu = N / 2;
 
     gs = 200.0 * (2.0 / (N - 1.0)) * (2.0 / (N - 1.0));
@@ -73,8 +94,8 @@ source(double ***m, int N)
 void
 initialize(double ***u1, double ***u2, double ***f, int N)
 {
-    zeros(u1, N);
-    zeros(u2, N);
+    full(u1, N);
+    full(u2, N);
     zeros(f, N);
 
     boundary(u1, N);

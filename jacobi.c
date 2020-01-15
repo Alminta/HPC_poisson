@@ -15,7 +15,7 @@ jacobi(double ***u1, double ***u2, double ***f, int N, int max_iter, double tole
     double ***u3;
 
     double tmp;
-    double tol = 2.0*tolerance;
+    double tol = 2.0 * tolerance;
     double gs = 2.0 / (N - 1.0);
     double oo6 = 1.0 / 6.0;
 
@@ -29,6 +29,7 @@ jacobi(double ***u1, double ***u2, double ***f, int N, int max_iter, double tole
                 for (k = 1; k < Nm1; k++){
                     tmp = oo6 * (u1[i-1][j][k] + u1[i+1][j][k] + u1[i][j-1][k] + u1[i][j+1][k] + u1[i][j][k-1] + u1[i][j][k+1] + f[i][j][k]);
                     u2[i][j][k] = tmp;
+                    tmp -= u1[i][j][k];
                     tol += tmp * tmp;
                 }
             }
@@ -44,5 +45,7 @@ jacobi(double ***u1, double ***u2, double ***f, int N, int max_iter, double tole
 
         // sqrt frobenius norm
         tol = sqrt(tol);
+        
     }
+    printf("%lf",tol);
 }
