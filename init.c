@@ -1,4 +1,6 @@
 #include <math.h>
+#include <stdio.h>
+
 
 void
 zeros(double ***m, int N)
@@ -57,7 +59,7 @@ source(double ***m, int N)
     zl = 2 * N / 6;
     zu = N / 2;
 
-    gs = 200 * 2 / (N - 1) * 2 / (N - 1);
+    gs = 200.0 * (2.0 / (N - 1.0)) * (2.0 / (N - 1.0));
 
     for (i = xl; i < xu; i++){
         for (j = yl; j < yu; j++){

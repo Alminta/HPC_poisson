@@ -1,6 +1,7 @@
 /* jacobi.c - Poisson problem in 3d
  * 
  */
+#include <stdio.h>
 #include <math.h>
 
 
@@ -14,9 +15,9 @@ jacobi(double ***u1, double ***u2, double ***f, int N, int max_iter, double tole
     double ***u3;
 
     double tmp;
-    double tol = tolerance + 1;
-    double gs = 2 / (N - 1);
-    double oo6 = 1 / 6;
+    double tol = 2.0*tolerance;
+    double gs = 2.0 / (N - 1.0);
+    double oo6 = 1.0 / 6.0;
 
     while (tol > tolerance && iter < max_iter) {
 
