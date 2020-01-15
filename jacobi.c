@@ -18,29 +18,31 @@ jacobi(double ***u1, double ***u2, double ***f, int N, int max_iter, double tole
     double ***u3;
 
     double tmp, sum, tol, tol_min;
-    // double gs = 2.0 / (N - 1.0);
     double oo6 = 1.0 / 6.0;
 
     tol_min = tolerance * tolerance;
 
+    // double reset_tol = 0.0;
 
-
+    #pragma omp parallel \
+    num_threads(2) \
+    shared(u1, u2, u3, f, Nm1, oo6, iter, tol_min, max_iter, tol) \
+    private(i, j, k, tmp) 
+    {
     tol = 2.0 * tol_min;
+    
     while (tol > tol_min && iter < max_iter) {
-        #pragma omp parallel \
-        num_threads(2) \
-        shared(u1, u2, f, Nm1, oo6, iter) \
-        private(i, j, k, tmp) \
-        // reduction(+ : iter)
-        {   
 
+        #pragma omp barrier
         tol = 0.0;
 
-        // part_tol = 0.0;
+        printf("Hej %d\n",iter);
 
         // run inner grid iterations
         #pragma omp for \
         schedule(dynamic) \
+        firstprivate(u1, u2) \
+        lastprivate(u2) \
         reduction(+ : tol)
         for (i = 1; i < Nm1; i++){
             for (j = 1; j < Nm1; j++){
@@ -53,27 +55,26 @@ jacobi(double ***u1, double ***u2, double ***f, int N, int max_iter, double tole
             }
         }
 
-        #pragma omp master
+        #pragma omp single
         {
-
         // swap pointers
         u3 = u1; 
         u1 = u2;
         u2 = u3;
 
+        printf("ITER: %d\n",iter);
         // increment iteration
         iter++;
         }
 
         // printf("TOL: %lf\n",tol);
-        // printf("ITER: %d\n",iter);
         // sqrt frobenius norm
         // #pragma omp critical (cr_tol)
         // {
         //     tol = sqrt(tol);
         //     // tol += part_tol;
         // }
-        
+
     }
     } /* end pragma parallel */
     printf("Iterations: %d\n",iter);
