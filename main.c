@@ -68,6 +68,10 @@ main(int argc, char *argv[])
     jacobi(u1, u2, f, N, iter_max, tolerance);
     #endif
 
+    #ifdef _GAUSS_SEIDEL
+    gauss_seidel(u1, u2, f, N, iter_max, tolerance);
+    #endif
+
     
     // dump  results if wanted 
     switch(output_type) {
