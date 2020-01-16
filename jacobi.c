@@ -29,14 +29,15 @@ jacobi(double ***u1, double ***u2, double ***f, int N, int max_iter, double tole
     shared(u1, u2, u3, f, Nm1, oo6, iter, tol_min, max_iter, tol) \
     private(i, j, k, tmp) 
     {
+
     tol = 2.0 * tol_min;
     
     while (tol > tol_min && iter < max_iter) {
 
-        #pragma omp barrier
+        #pragma omp barrier // ensure all threads are in while loop before resetting tol
         tol = 0.0;
 
-        printf("Hej %d\n",iter);
+        // printf("Hej %d\n",iter);
 
         // run inner grid iterations
         #pragma omp for \
@@ -62,7 +63,7 @@ jacobi(double ***u1, double ***u2, double ***f, int N, int max_iter, double tole
         u1 = u2;
         u2 = u3;
 
-        printf("ITER: %d\n",iter);
+        // printf("ITER: %d\n",iter);
         // increment iteration
         iter++;
         }
