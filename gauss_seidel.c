@@ -3,8 +3,9 @@
  */
 #include <math.h>
 #include <stdio.h>
+#include <omp.h>
 
-
+/*
 void
 gauss_seidel(double ***u, double ***f, int N, int max_iter, double tolerance) 
 {
@@ -12,11 +13,12 @@ gauss_seidel(double ***u, double ***f, int N, int max_iter, double tolerance)
     int Nm1 = N-1;
     int iter = 0;
 
-    double tmp, tmp2;
+    double tmp, tmp2, tol_min;
+    tol_min = tolerance * tolerance;
     double tol = 2.0 * tolerance;
     double div6 = 1.0 / 6.0;
 
-    while (tol > tolerance && iter < max_iter) {
+    while (tol > tol_min && iter < max_iter) {
 
         tol = 0.0;
 
@@ -34,19 +36,13 @@ gauss_seidel(double ***u, double ***f, int N, int max_iter, double tolerance)
 
         // increment iteration
         iter++;
-
-        // sqrt frobenius norm
-        tol = sqrt(tol);
         
     }
-    printf("Gauss: N = %d \tIterations = %d \t Tolerance = %lf\n",N, iter, sqrt(tol));
-    // printf("TOL: %lf\n",tol);
-    // printf("SUM: %lf\n",sum);
-    // printf("Iterations: %d\n",iter);
+    printf("\nGauss: N = %d \tIterations = %d \t Tolerance = %lf\n",N, iter, sqrt(tol));
 }
+*/
 
-
-/*
+///*
 void
 gauss_seidel(double ***u, double ***f, int N, int max_iter, double tolerance) 
 {
@@ -65,6 +61,10 @@ gauss_seidel(double ***u, double ***f, int N, int max_iter, double tolerance)
     shared(u, f, Nm1, div6, iter, tol_min, max_iter, tol) \
     private(i, j, k, tmp) 
     {
+    #pragma omp master
+    {
+    printf("N=%d T=%d\n",N ,omp_get_num_threads());
+    }
 
     // run iterations
     for (iter = 0 ; iter < max_iter; ) {
@@ -89,7 +89,7 @@ gauss_seidel(double ***u, double ***f, int N, int max_iter, double tolerance)
     }
     } // end pragma parallel
 }
-*/
+//*/
 
 // printf("Iterations: %d\n",iter);
 // printf("ITER: %d\n",iter);
