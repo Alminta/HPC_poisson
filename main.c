@@ -64,12 +64,13 @@ main(int argc, char *argv[])
     // initialize matrices
     initialize(u1, u2, f, N);
     
+    // calculate poisson problem
     #ifdef _JACOBI
     jacobi(u1, u2, f, N, iter_max, tolerance);
     #endif
 
     #ifdef _GAUSS_SEIDEL
-    gauss_seidel(u1, u2, f, N, iter_max, tolerance);
+    gauss_seidel(u1, f, N, iter_max, tolerance);
     #endif
 
     
