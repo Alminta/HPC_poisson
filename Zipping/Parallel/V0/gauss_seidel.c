@@ -21,7 +21,7 @@ gauss_seidel(double ***u, double ***f, int N, int max_iter, double tolerance)
     while (iter < max_iter) {
         
         // initialize parallel
-        #pragma omp parallel for
+        #pragma omp parallel for shared(u, f, Nm1, div6) private(i,j,k)
         for (i = 1; i < Nm1; i++){
             for (j = 1; j < Nm1; j++){
                 for (k = 1; k < Nm1; k++){

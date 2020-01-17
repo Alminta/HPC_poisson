@@ -68,6 +68,7 @@ main(int argc, char *argv[])
     // initialize matrices
     initialize(u1, u2, f, N, start_T);
     
+    
     // calculate poisson problem
     #ifdef _JACOBI
     jacobi(u1, u2, f, N, iter_max, tolerance);
