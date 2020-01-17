@@ -37,10 +37,5 @@ gauss_seidel(double ***u, double ***f, int N, int max_iter, double tolerance)
 
         // increment iteration
         iter++;
-        
     }
-    // printf("\nGauss: N = %d \tIterations = %d \t Tolerance = %lf\n",N, iter, sqrt(tol));
 }
-
-// printf("Iterations: %d\n",iter);
-// printf("ITER: %d\n",iter);

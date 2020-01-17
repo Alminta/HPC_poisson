@@ -44,8 +44,5 @@ jacobi(double ***u1, double ***u2, double ***f, int N, int max_iter, double tole
 
         // increment iteration
         iter++;
-
     }
-    // printf("Jacobi: N = %d \tIterations = %d \t Tolerance = %lf\n",N,iter,sqrt(tol));
 }
-

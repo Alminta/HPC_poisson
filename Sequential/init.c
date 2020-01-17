@@ -17,14 +17,14 @@ zeros(double ***m, int N)
 }
 
 void
-full(double ***m, int N)
+full(double ***m, int N, double start_t)
 {
     int i,j,k;
 
     for (i = 0; i < N; i++){
         for (j = 0; j < N; j++){
             for (k = 0; k < N; k++){
-                m[i][j][k] = 16;
+                m[i][j][k] = start_t;
             }
         }
     }
@@ -73,6 +73,7 @@ source(double ***m, int N)
 
     double gs;
 
+    // compute boundaries
     xl = 0;
     xu = 5 * N / 16;
     yl = 0;
@@ -92,10 +93,10 @@ source(double ***m, int N)
 }
 
 void
-initialize(double ***u1, double ***u2, double ***f, int N)
+initialize(double ***u1, double ***u2, double ***f, int N, double start_t)
 {
-    full(u1, N);
-    full(u2, N);
+    full(u1, N, start_t);
+    full(u2, N, start_t);
     zeros(f, N);
 
     boundary(u1, N);

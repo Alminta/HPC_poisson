@@ -20,7 +20,6 @@
 int
 main(int argc, char *argv[]) 
 {
-
     int 	N = N_DEFAULT;
     int 	iter_max = 1000;
     double	tolerance=1000;
@@ -33,10 +32,7 @@ main(int argc, char *argv[])
     double 	***u2 = NULL;
     double 	***f = NULL;
 
-
     /* get the paramters from the command line */
-
-    
     N         = atoi(argv[1]);	// grid size
     iter_max  = atoi(argv[2]);  // max. no. of iterations
     tolerance = atof(argv[3]);  // tolerance
@@ -45,7 +41,6 @@ main(int argc, char *argv[])
 	output_type = atoi(argv[5]);  // ouput type
     }
     
-
     // allocate memory
     if ( (u1 = d_malloc_3d(N, N, N)) == NULL ) {
         perror("array u1: allocation failed");
@@ -60,9 +55,8 @@ main(int argc, char *argv[])
         exit(-1);
     }
 
-
     // initialize matrices
-    initialize(u1, u2, f, N);
+    initialize(u1, u2, f, N, start_T);
     
     // calculate poisson problem
     #ifdef _JACOBI
@@ -73,7 +67,6 @@ main(int argc, char *argv[])
     gauss_seidel(u1, f, N, iter_max, tolerance);
     #endif
 
-    
     // dump  results if wanted 
     switch(output_type) {
 	case 0:
