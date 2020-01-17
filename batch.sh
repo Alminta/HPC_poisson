@@ -35,7 +35,6 @@ THREADS="16 20 24"
 for n in $N
 do
     for T in $THREADS
-    # echo "N=$n T=$T"
     do
         time OMP_NUM_THREADS=$T ./$EXECUTABLE $n $ITER $TOL $START_T $OUT
     done

@@ -7,6 +7,10 @@
 #include "print.h"
 #include "init.h"
 
+#ifdef _OPENMP
+#include <omp.h>
+#endif
+
 #ifdef _JACOBI
 #include "jacobi.h"
 #endif
@@ -61,6 +65,12 @@ main(int argc, char *argv[])
     }
 
     #pragma omp parallel
+    {
+    
+    #pragma omp master
+    {
+    printf("N=%d T=%d",N ,omp_get_num_threads());
+    }
 
     // initialize matrices
     initialize(u1, u2, f, N);
@@ -74,6 +84,7 @@ main(int argc, char *argv[])
     gauss_seidel(u1, f, N, iter_max, tolerance);
     #endif
 
+    } // end parallel
     
     // dump  results if wanted 
     switch(output_type) {

@@ -20,17 +20,10 @@ gauss_seidel(double ***u, double ***f, int N, int max_iter, double tolerance)
     double tol = 2.0 * tol_min;
     double div6 = 1.0 / 6.0;
 
-    #pragma omp master
-    {
-    printf("N=%d T=%d\n",N ,omp_get_num_threads());
-    }
-
     // run iterations
-    for (iter = 0 ; iter < max_iter; ) {
+    for (iter = 0 ; iter < max_iter; iter++) {
 
-        #pragma omp for ordered(2) \
-        shared(u, f, Nm1, div6, iter, tol_min, max_iter, tol) \
-        private(i, j, k, tmp) 
+        #pragma omp for ordered(2) 
         for (i = 1; i < Nm1; i++){
             for (j = 1; j < Nm1; j++){
             #pragma omp ordered \
@@ -41,12 +34,6 @@ gauss_seidel(double ***u, double ***f, int N, int max_iter, double tolerance)
                 }
             #pragma omp ordered depend(source)
             }
-        }
-
-        #pragma omp single
-        {
-        // increment iteration
-        iter++;
         }
     }
 }

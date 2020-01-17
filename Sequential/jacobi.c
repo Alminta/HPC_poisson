@@ -9,7 +9,7 @@ jacobi(double ***u1, double ***u2, double ***f, int N, int max_iter, double tole
 {
     // initialize variables
     int i, j, k;
-    int Nm1 = N-1;
+    int Nm1 = N - 1;
     int iter = 0;
 
     double ***u3;
@@ -46,6 +46,6 @@ jacobi(double ***u1, double ***u2, double ***f, int N, int max_iter, double tole
         iter++;
 
     }
-    printf("Jacobi: N = %d \tIterations = %d \t Tolerance = %lf\n",N,iter,sqrt(tol));
+    // printf("Jacobi: N = %d \tIterations = %d \t Tolerance = %lf\n",N,iter,sqrt(tol));
 }
 

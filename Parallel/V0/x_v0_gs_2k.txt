@@ -1,0 +1,26 @@
+V0 Gauss Clang Iters=2000 OMP_PROC_BIND=close Start_t=16
+
+N=50 T=1 time = 1.085
+N=50 T=2 time = 0.542
+N=50 T=4 time = 0.276
+N=50 T=8 time = 0.144
+N=50 T=12 time = 0.100
+N=50 T=16 time = 0.100
+N=50 T=20 time = 0.086
+N=50 T=24 time = 0.071
+N=100 T=1 time = 9.732
+N=100 T=2 time = 4.878
+N=100 T=4 time = 2.497
+N=100 T=8 time = 1.308
+N=100 T=12 time = 0.914
+N=100 T=16 time = 0.715
+N=100 T=20 time = 0.566
+N=100 T=24 time = 0.519
+N=200 T=1 time = 83.609
+N=200 T=2 time = 41.851
+N=200 T=4 time = 21.256
+N=200 T=8 time = 10.740
+N=200 T=12 time = 7.741
+N=200 T=16 time = 5.870
+N=200 T=20 time = 5.121
+N=200 T=24 time = 5.076

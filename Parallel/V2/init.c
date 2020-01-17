@@ -7,10 +7,7 @@ zeros(double ***m, int N)
 {
     int i,j,k;
 
-    #pragma omp for \
-    schedule(static) \
-    shared(m, N) \
-    private(i, j, k) 
+    #pragma omp for
     for (i = 0; i < N; i++){
         for (j = 0; j < N; j++){
             for (k = 0; k < N; k++){
@@ -25,10 +22,7 @@ full(double ***m, int N)
 {
     int i,j,k;
 
-    #pragma omp for \
-    schedule(static) \
-    shared(m, N) \
-    private(i, j, k) 
+    #pragma omp for
     for (i = 0; i < N; i++){
         for (j = 0; j < N; j++){
             for (k = 0; k < N; k++){
@@ -45,30 +39,21 @@ boundary(double ***m, int N)
     int i, j, k, Nm1;
     Nm1 = N - 1;
 
-    #pragma omp for \
-    schedule(static) \
-    shared(m, N, Nm1) \
-    private(i, k) 
+    #pragma omp for
     for (i = 0; i < N; i++){
         for (k = 0; k < N; k++){
             m[i][0][k] = 0.0;
         }
     }
 
-    #pragma omp for \
-    schedule(static) \
-    shared(m, N, Nm1) \
-    private(i, k) 
+    #pragma omp for
     for (i = 0; i < N; i++){
         for (k = 0; k < N; k++){
             m[i][Nm1][k] = 20.0;
         }
     }
 
-    #pragma omp for \
-    schedule(static) \
-    shared(m, N, Nm1) \
-    private(j, k) 
+    #pragma omp for
     for (j = 0; j < N; j++){
         for (k = 0; k < N; k++){
             m[0][j][k] = 20.0;
@@ -76,10 +61,7 @@ boundary(double ***m, int N)
         }
     }
 
-    #pragma omp for \
-    schedule(static) \
-    shared(m, N, Nm1) \
-    private(i, j) 
+    #pragma omp for
     for (i = 0; i < N; i++){
         for (j = 0; j < N; j++){
             m[i][j][0] = 20.0;
@@ -106,10 +88,7 @@ source(double ***m, int N)
 
     gs = 200.0 * (2.0 / (N - 1.0)) * (2.0 / (N - 1.0));
 
-    #pragma omp for \
-    schedule(static) \
-    shared(m, N, gs, xl, xu, yl, yu, zl, zu) \
-    private(i, j, k) 
+    #pragma omp for
     for (i = xl; i < xu; i++){
         for (j = yl; j < yu; j++){
             for (k = zl; k < zu; k++){

@@ -23,12 +23,12 @@ gauss_seidel(double ***u, double ***f, int N, int max_iter, double tolerance)
 
     // initialize parallel
     #pragma omp parallel \
-    shared(u, f, Nm1, div6, iter, tol_min, max_iter, tol) \
+    shared(u, f, Nm1, div6, iter, max_iter) \
     private(i, j, k, tmp) 
     {
     #pragma omp master
     {
-    printf("N=%d T=%d\n",N ,omp_get_num_threads());
+    printf("N=%d T=%d",N ,omp_get_num_threads());
     }
 
     // run iterations

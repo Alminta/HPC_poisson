@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-#BSUB -J tyr_2
-#BSUB -o tyr_2_%J.out
+#BSUB -J tyr_8_er_test_gs
+#BSUB -o tyr_8_er_test_gs_%J.out
 #BSUB -q hpcintro
 #BSUB -n 1
 #BSUB -R "rusage[mem=1024]"
@@ -10,19 +10,20 @@
 #BSUB -N
 
 module load studio
+module load clang/9.0.0
 
 # executable
-EXECUTABLE=poisson_j
+EXECUTABLE=poisson_gs
 
 # args
-N="10 20 30 40 50 60 70 80 90 100"
-ITER="10000"
+N="100"
+ITER="4000"
 TOL="0.05"
 START_T="0"
 OUT="0"
 
 # environment variables
-export OMP_NUM_THREADS=1
+export OMP_NUM_THREADS=8
 
 # experiment name 
 JID=${LSB_JOBID}

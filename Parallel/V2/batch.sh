@@ -1,11 +1,11 @@
 #!/bin/bash
 #
-#BSUB -J tyr_3_x_test_clang
-#BSUB -o tyr_3_x_test_clang_%J.out
+#BSUB -J tyr_8_v2_j
+#BSUB -o tyr_8_v2_j_%J.out
 #BSUB -q hpcintro
 #BSUB -n 24
 #BSUB -R "rusage[mem=1024]"
-#BSUB -W 10
+#BSUB -W 20
 #BSUB -R "span[hosts=1]"
 
 module load studio
@@ -13,10 +13,10 @@ module load clang/9.0.0
 # module swap clang/9.0.0
 
 # executable
-EXECUTABLE=poisson_gs
+EXECUTABLE=poisson_j
 
 # args
-N="25 50 100 200"
+N="50 100 200"
 ITER="2000"
 TOL="0.05"
 START_T="0"
@@ -27,7 +27,7 @@ OUT="0"
 export OMP_PROC_BIND=close
 
 # THREADS="1 2 4 8 12"
-THREADS="16 20 24"
+THREADS="1 2 4 8 12 16 20 24"
 
 # start the collect command with the above settings
 # ./$EXECUTABLE $N $ITER $TOL $START_T $OUT
@@ -35,7 +35,6 @@ THREADS="16 20 24"
 for n in $N
 do
     for T in $THREADS
-    # echo "N=$n T=$T"
     do
         time OMP_NUM_THREADS=$T ./$EXECUTABLE $n $ITER $TOL $START_T $OUT
     done
